@@ -49,12 +49,16 @@ var getHoverPlayBackwardsEvents = function getHoverPlayBackwardsEvents(animation
 };
 
 var getClickAndPlayBackwardsEvents = function getClickAndPlayBackwardsEvents(animation) {
-  var directionMenu = 1;
   return {
     onClick: function onClick() {
-      animation.setDirection(directionMenu);
-      animation.play();
-      directionMenu = -directionMenu;
+      if(animation.currentFrame==0) {
+        animation.play();
+        animation.setDirection(1);
+      }
+      else {
+        animation.setDirection(animation.playDirection*-1);
+        animation.play();
+      }
     }
   };
 };
